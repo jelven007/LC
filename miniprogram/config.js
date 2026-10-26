@@ -7,7 +7,7 @@
  * 留空则云同步不启用，小程序退回纯本地模式（功能照常可用，只是不跨设备同步）。
  */
 module.exports = {
-  cloudEnv: '',
+  cloudEnv: 'life-countdown-d7g8p5w2hf198cb47',
 
   /**
    * 备案号。备案通过后，在 mp 后台「小程序备案」模块复制到此。
