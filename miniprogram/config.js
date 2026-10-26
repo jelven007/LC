@@ -14,7 +14,7 @@ module.exports = {
    * 形如：京ICP备2026xxxxxx号
    * 留空则不在页面展示（不影响功能，但上架前应填上）
    */
-  icpNumber: '',
+  icpNumber: '苏ICP备2026078385号-1',
 
   /**
    * 注意：本项目的云端读写使用 doc(id).get() / doc(id).set()，
