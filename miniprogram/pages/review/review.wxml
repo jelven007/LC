@@ -1,0 +1,151 @@
+<view class="page">
+  <block wx:if="{{hasData}}">
+    <!-- 总览 -->
+    <view class="hero">
+      <view class="hero-top">
+        <view>
+          <view class="hero-num">{{overview.goalDone}}<text class="hero-unit">/{{overview.goalTotal}}</text></view>
+          <view class="hero-label">累计完成目标 · 完成率 {{overview.goalPercent}}%</view>
+        </view>
+        <view class="hero-right">
+          <view class="hero-chip now">{{overview.activeCount}} 个进行中</view>
+          <view class="hero-chip past">{{overview.finishedCount}} 个已结束</view>
+        </view>
+      </view>
+      <view class="hero-bar">
+        <view class="hero-bar-in" style="width:{{overview.goalPercent}}%"></view>
+      </view>
+      <view class="hero-foot">截至 {{todayText}}</view>
+    </view>
+
+    <!-- 指标 -->
+    <view class="card">
+      <view class="card-hd">
+        <text class="t">数据总览</text>
+      </view>
+      <view class="stat-grid">
+        <view class="stat">
+          <view class="stat-num">{{overview.stageTotal}}</view>
+          <view class="stat-label">阶段总数</view>
+        </view>
+        <view class="stat">
+          <view class="stat-num">{{overview.activeCount}}</view>
+          <view class="stat-label">进行中</view>
+        </view>
+        <view class="stat">
+          <view class="stat-num">{{overview.goalDone}}</view>
+          <view class="stat-label">已完成目标</view>
+        </view>
+        <view class="stat">
+          <view class="stat-num">{{overview.reminderActive}}</view>
+          <view class="stat-label">启用提醒</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 完成趋势 -->
+    <view class="card">
+      <view class="card-hd">
+        <text class="t">完成趋势</text>
+        <text class="more">共 {{trendSum}} 次</text>
+      </view>
+
+      <view class="range">
+        <view
+          wx:for="{{rangeOptions}}"
+          wx:key="key"
+          class="range-item {{range === item.key ? 'on' : ''}}"
+          data-key="{{item.key}}"
+          bindtap="onRange"
+        >{{item.label}}</view>
+      </view>
+
+      <view class="chart">
+        <view class="chart-grid">
+          <view class="grid-line"></view>
+          <view class="grid-line"></view>
+          <view class="grid-line"></view>
+        </view>
+        <view class="bars">
+          <view class="bar-col" wx:for="{{trend}}" wx:key="date">
+            <view class="bar-value" wx:if="{{item.value}}">{{item.value}}</view>
+            <view class="bar-track">
+              <view
+                class="bar-fill"
+                style="height:{{item.percent}}%;{{item.value ? '' : 'opacity:0'}}"
+              ></view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="chart-axis">
+        <text>{{trend[0].label}} 日</text>
+        <text class="muted">完成动作分布（目标打勾 + 提醒完成）</text>
+        <text>{{trend[trend.length - 1].label}} 日</text>
+      </view>
+    </view>
+
+    <!-- 阶段完成率排行 -->
+    <view class="card" wx:if="{{rank.length}}">
+      <view class="card-hd">
+        <text class="t">阶段完成率</text>
+        <text class="more">{{rank.length}} 个</text>
+      </view>
+      <view class="rank-item" wx:for="{{rank}}" wx:key="id">
+        <view class="rank-head">
+          <text class="rank-no">{{index + 1}}</text>
+          <view class="st-dot" style="background:{{item.color}}"></view>
+          <view class="grow ellipsis rank-name">{{item.name}}</view>
+          <text class="rank-pct" style="color:{{item.color}}">{{item.percent}}%</text>
+        </view>
+        <view class="bar">
+          <view class="bar-inner" style="width:{{item.percent}}%;background:{{item.color}}"></view>
+        </view>
+        <view class="rank-meta">
+          <text>{{item.done}}/{{item.total}} 项目标</text>
+          <text wx:if="{{item.total === 0}}">暂未设置目标</text>
+          <text wx:else>{{item.dimensionLabel}}维度 · {{item.statusText}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 阶段时间线 -->
+    <view class="card" wx:if="{{timeline.length}}">
+      <view class="card-hd">
+        <text class="t">阶段时间线</text>
+        <text class="more">按开始时间</text>
+      </view>
+      <view class="tl">
+        <view
+          class="tl-item {{index === timeline.length - 1 ? 'last' : ''}}"
+          wx:for="{{timeline}}"
+          wx:key="id"
+          bindtap="editStage"
+          data-id="{{item.id}}"
+        >
+          <view class="tl-rail">
+            <view class="tl-dot" style="background:{{item.color}}"></view>
+            <view class="tl-line"></view>
+          </view>
+          <view class="grow tl-body">
+            <view class="tl-name ellipsis">{{item.name}}</view>
+            <view class="tl-date">{{item.dateText}}</view>
+            <view class="tl-tags">
+              <text class="chip status-{{item.status}}">{{item.statusText}}</text>
+              <text class="chip" wx:if="{{item.total}}">完成 {{item.done}}/{{item.total}}</text>
+            </view>
+          </view>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="tip">数据统计自本机存储，完成的动作会按日期计入趋势图。</view>
+  </block>
+
+  <view class="card" wx:else>
+    <view class="empty">还没有可回顾的数据</view>
+    <view class="btn btn-primary btn-block" bindtap="goStages">去创建阶段</view>
+  </view>
+</view>

@@ -1,0 +1,239 @@
+.cur {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5B7CFA, #7B5CFF);
+  color: #FFFFFF;
+  font-size: 36rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+}
+
+.avatar.sm {
+  width: 72rpx;
+  height: 72rpx;
+  font-size: 30rpx;
+}
+
+.cur-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.cur-sub {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 6rpx;
+}
+
+.btn-sm {
+  height: 56rpx;
+  padding: 0 24rpx;
+  font-size: 24rpx;
+  flex-shrink: 0;
+}
+
+.avatar.wechat {
+  background: linear-gradient(135deg, #07C160, #0BB35B);
+}
+
+.login-cta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.login-avatar {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+}
+
+.login-avatar.wechat {
+  background: linear-gradient(135deg, #07C160, #0BB35B);
+  color: #FFFFFF;
+}
+
+.login-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.login-sub {
+  font-size: 23rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 8rpx;
+  line-height: 1.5;
+}
+
+.acct-acts {
+  display: flex;
+  margin-top: 20rpx;
+  padding-top: 18rpx;
+  border-top: 1rpx dashed var(--color-border-secondary);
+}
+
+.acct-acts .btn {
+  flex: 1;
+  margin: 0 8rpx;
+}
+
+.sync-hint {
+  font-size: 21rpx;
+  color: var(--color-text-tertiary);
+  text-align: center;
+  margin-top: 16rpx;
+  line-height: 1.5;
+}
+
+.strong {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.u-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--color-border-tertiary);
+}
+
+.u-item:last-child {
+  border-bottom: none;
+}
+
+.u-item.on .u-name {
+  color: var(--color-primary);
+}
+
+.u-body {
+  min-width: 0;
+}
+
+.u-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+}
+
+.tag {
+  font-size: 20rpx;
+  color: var(--color-primary);
+  background: #EEF2FF;
+  border-radius: 999rpx;
+  padding: 2rpx 12rpx;
+  margin-left: 12rpx;
+  font-weight: 400;
+}
+
+.u-meta {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 6rpx;
+}
+
+.u-acts {
+  flex-shrink: 0;
+  margin-left: 12rpx;
+  display: flex;
+  align-items: center;
+}
+
+.u-act {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  padding: 8rpx 14rpx;
+  background: var(--color-bg-tertiary);
+  border-radius: 999rpx;
+  margin-left: 8rpx;
+}
+
+.u-act.danger {
+  color: var(--color-danger);
+  background: #FFF0F0;
+}
+
+/* 微信登录状态 */
+.status-off {
+  color: var(--color-text-tertiary);
+}
+
+.wx-state {
+  background: var(--color-bg-secondary);
+  border-radius: 18rpx;
+  padding: 24rpx;
+}
+
+.state-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14rpx;
+}
+
+.dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+}
+
+.dot.off {
+  background: var(--color-text-quaternary);
+}
+
+.state-text {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.wx-desc {
+  font-size: 23rpx;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.wx-desc + .wx-desc {
+  margin-top: 12rpx;
+}
+
+.strong {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.tip {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  line-height: 1.6;
+  padding: 4rpx 8rpx 0;
+}
+
+.modal-input {
+  background: var(--color-bg-secondary);
+  border-radius: 16rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+}

@@ -1,0 +1,272 @@
+.hero {
+  background: linear-gradient(135deg, #5B7CFA 0%, #7B5CFF 100%);
+  border-radius: 28rpx;
+  padding: 36rpx 32rpx;
+  color: #FFFFFF;
+  margin-bottom: 24rpx;
+  box-shadow: 0 12rpx 30rpx rgba(91, 124, 250, 0.28);
+}
+
+.hero-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.hero-day {
+  font-size: 88rpx;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.hero-sub {
+  font-size: 24rpx;
+  opacity: 0.85;
+  margin-top: 12rpx;
+}
+
+.hero-right {
+  text-align: right;
+}
+
+.hero-pct {
+  font-size: 48rpx;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.hero-bar {
+  height: 10rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.28);
+  margin-top: 28rpx;
+  overflow: hidden;
+}
+
+.hero-bar-in {
+  height: 100%;
+  background: #FFFFFF;
+  border-radius: 999rpx;
+}
+
+.hero-foot {
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  opacity: 0.9;
+}
+
+/* 人生进度 */
+.life-row {
+  display: flex;
+  align-items: baseline;
+}
+
+.life-pct {
+  font-size: 56rpx;
+  font-weight: 700;
+  color: var(--color-now);
+  margin-right: 20rpx;
+}
+
+.life-desc {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+}
+
+.life-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 24rpx;
+}
+
+.lc {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 10rpx;
+  margin: 0 8rpx 8rpx 0;
+}
+
+/* 生命格子：米黄=已走过，橙红=今年，淡紫=未来 */
+.lc.s0 {
+  background: var(--color-past);
+}
+
+.lc.s1 {
+  background: var(--color-now);
+}
+
+.lc.s2 {
+  background: var(--color-future-bg);
+}
+
+.life-foot {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+}
+
+.life-empty .t {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.life-empty .small {
+  margin-top: 6rpx;
+}
+
+.life-empty .arrow {
+  color: var(--color-text-quaternary);
+  font-size: 40rpx;
+}
+
+/* 提醒 */
+.rm-item {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid var(--color-border-tertiary);
+}
+
+.rm-item:last-child {
+  border-bottom: none;
+}
+
+.rm-title {
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+}
+
+.rm-title.done {
+  color: var(--color-text-quaternary);
+  text-decoration: line-through;
+}
+
+.rm-meta {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 6rpx;
+}
+
+.rm-right {
+  text-align: right;
+  margin-left: 16rpx;
+  flex-shrink: 0;
+}
+
+.rm-time {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.rm-tag {
+  margin-top: 6rpx;
+  font-size: 20rpx;
+  color: var(--color-text-tertiary);
+}
+
+/* 阶段 */
+.st-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--color-border-tertiary);
+}
+
+.st-item:last-child {
+  border-bottom: none;
+}
+
+.st-head {
+  display: flex;
+  align-items: center;
+}
+
+.st-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 14rpx;
+  flex-shrink: 0;
+}
+
+.st-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.st-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 12rpx;
+}
+
+.st-meta .pct {
+  font-weight: 600;
+}
+
+.goals {
+  margin-top: 12rpx;
+}
+
+.goal {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 0;
+}
+
+.goal-title {
+  flex: 1;
+  min-width: 0;
+  margin-left: 16rpx;
+  font-size: 26rpx;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.goal-title.done {
+  color: var(--color-text-quaternary);
+  text-decoration: line-through;
+}
+
+.chip.lv {
+  margin-left: 12rpx;
+}
+
+.goal-rest {
+  font-size: 22rpx;
+  color: var(--color-text-quaternary);
+  padding-left: 56rpx;
+}
+
+.add-line {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx dashed var(--color-border-secondary);
+  text-align: center;
+  font-size: 26rpx;
+  color: var(--color-primary);
+}
+
+/* 回顾入口 */
+.review-entry .t {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.review-entry .arrow {
+  color: var(--color-text-quaternary);
+  font-size: 40rpx;
+}
+
+.foot-tip {
+  text-align: center;
+  font-size: 24rpx;
+  color: var(--color-text-tertiary);
+  padding: 12rpx 0 24rpx;
+}

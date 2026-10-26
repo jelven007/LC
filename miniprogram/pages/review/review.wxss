@@ -1,0 +1,350 @@
+.hero {
+  background: linear-gradient(135deg, #5B7CFA 0%, #7B5CFF 100%);
+  border-radius: 28rpx;
+  padding: 36rpx 32rpx;
+  color: #FFFFFF;
+  margin-bottom: 24rpx;
+  box-shadow: 0 12rpx 30rpx rgba(91, 124, 250, 0.28);
+}
+
+.hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.hero-num {
+  font-size: 72rpx;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.hero-unit {
+  font-size: 32rpx;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+.hero-label {
+  font-size: 24rpx;
+  opacity: 0.88;
+  margin-top: 12rpx;
+}
+
+.hero-right {
+  text-align: right;
+}
+
+.hero-chip {
+  font-size: 22rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.22);
+  margin-bottom: 10rpx;
+}
+
+/* hero 徽章位于固定渐变上，用写实色：进行中=橙红，已结束=米黄 */
+.hero-chip.now {
+  background: #F05A28;
+  color: #FFFFFF;
+}
+
+.hero-chip.past {
+  background: #E8D9A8;
+  color: #5A4A1E;
+}
+
+.hero-chip.ghost {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.hero-bar {
+  height: 10rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.28);
+  margin-top: 28rpx;
+  overflow: hidden;
+}
+
+.hero-bar-in {
+  height: 100%;
+  background: #FFFFFF;
+  border-radius: 999rpx;
+}
+
+.hero-foot {
+  margin-top: 16rpx;
+  font-size: 22rpx;
+  opacity: 0.85;
+}
+
+.stat-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 6rpx;
+}
+
+/* 区间切换 */
+.range {
+  display: flex;
+  background: var(--color-bg-tertiary);
+  border-radius: 999rpx;
+  padding: 6rpx;
+  margin-bottom: 24rpx;
+}
+
+.range-item {
+  flex: 1;
+  text-align: center;
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  padding: 10rpx 0;
+  border-radius: 999rpx;
+}
+
+.range-item.on {
+  background: var(--color-bg-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* 柱状图 */
+.chart {
+  position: relative;
+  height: 260rpx;
+}
+
+.chart-grid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.grid-line {
+  height: 1rpx;
+  background: var(--color-border-tertiary);
+}
+
+.bars {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.bar-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  padding: 0 1rpx;
+}
+
+/* 趋势图统计的是已发生的完成动作=过去，用米黄系 */
+.bar-value {
+  font-size: 16rpx;
+  color: var(--color-past);
+  margin-bottom: 4rpx;
+  line-height: 1;
+  transform: scale(0.85);
+}
+
+.bar-track {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.bar-fill {
+  width: 100%;
+  border-radius: 6rpx 6rpx 0 0;
+  background: linear-gradient(180deg, #D9BC7E, #A68A4E);
+  min-height: 4rpx;
+  transition: height 0.3s ease;
+}
+
+.chart-axis {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 12rpx;
+}
+
+.chart-axis .muted {
+  font-size: 20rpx;
+}
+
+/* 排行 */
+.rank-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--color-border-tertiary);
+}
+
+.rank-item:last-child {
+  border-bottom: none;
+}
+
+.rank-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.rank-no {
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  background: var(--color-bg-tertiary);
+  flex-shrink: 0;
+  margin-right: 12rpx;
+}
+
+.st-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+}
+
+.rank-name {
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+}
+
+.rank-pct {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-left: 12rpx;
+}
+
+.rank-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 10rpx;
+}
+
+/* 时间线 */
+.tl-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.tl-item.last .tl-line {
+  display: none;
+}
+
+.tl-rail {
+  width: 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: 10rpx;
+}
+
+.tl-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tl-line {
+  flex: 1;
+  width: 2rpx;
+  background: var(--color-border-tertiary);
+  margin: 8rpx 0;
+  min-height: 60rpx;
+}
+
+.tl-body {
+  padding-bottom: 28rpx;
+  margin-left: 16rpx;
+}
+
+.tl-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.tl-date {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 6rpx;
+}
+
+.tl-tags {
+  display: flex;
+  align-items: center;
+  margin-top: 12rpx;
+}
+
+.tl-tags .chip {
+  margin-right: 12rpx;
+}
+
+/* 状态徽章与阶段页同规则：进行中=橙红，未开始=紫，已结束=米黄 */
+.chip.status-active {
+  background: var(--color-now-bg);
+  color: var(--color-now);
+}
+
+.chip.status-upcoming {
+  background: var(--color-future-bg);
+  color: var(--color-future);
+}
+
+.chip.status-done,
+.chip.status-invalid {
+  background: var(--color-past-bg);
+  color: var(--color-past);
+}
+
+.arrow {
+  color: var(--color-text-quaternary);
+  font-size: 40rpx;
+  flex-shrink: 0;
+  padding-top: 6rpx;
+}
+
+.tip {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  line-height: 1.6;
+  padding: 4rpx 8rpx 0;
+}

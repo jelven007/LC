@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/today/today",
+    "pages/stages/stages",
+    "pages/reminders/reminders",
+    "pages/mine/mine",
+    "pages/review/review",
+    "pages/account/account",
+    "pages/stage-edit/stage-edit",
+    "pages/reminder-edit/reminder-edit"
+  ],
+  "lazyCodeLoading": "requiredComponents",
+  "window": {
+    "backgroundTextStyle": "@bgTxtStyle",
+    "navigationBarBackgroundColor": "@navBgColor",
+    "navigationBarTitleText": "生命倒计时",
+    "navigationBarTextStyle": "@navTxtStyle",
+    "backgroundColor": "@bgColor",
+    "enablePullDownRefresh": false
+  },
+  "darkmode": true,
+  "themeLocation": "theme.json",
+  "tabBar": {
+    "color": "@tabFontColor",
+    "selectedColor": "@tabSelectedColor",
+    "backgroundColor": "@tabBgColor",
+    "borderStyle": "@tabBorderStyle",
+    "list": [
+      {
+        "pagePath": "pages/today/today",
+        "text": "今日"
+      },
+      {
+        "pagePath": "pages/stages/stages",
+        "text": "阶段"
+      },
+      {
+        "pagePath": "pages/reminders/reminders",
+        "text": "提醒"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "__usePrivacyCheck__": true,
+  "sitemapLocation": "sitemap.json"
+}

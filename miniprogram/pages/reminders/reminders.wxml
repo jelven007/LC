@@ -1,0 +1,60 @@
+<view class="page">
+  <view class="summary" wx:if="{{summary.total}}">
+    共 {{summary.total}} 个提醒 · 今日到期 {{summary.todayCount}} 项 · 已完成 {{summary.doneCount}} 项
+  </view>
+
+  <view wx:if="{{groups.length}}">
+    <view class="card group" wx:for="{{groups}}" wx:for-item="group" wx:key="key">
+      <view class="card-hd">
+        <text class="t {{group.tone}}">{{group.title}}</text>
+        <text class="more">{{group.items.length}} 项</text>
+      </view>
+
+      <view
+        class="rm {{item.overdue ? 'overdue' : ''}} {{item.enabled ? '' : 'off'}}"
+        wx:for="{{group.items}}"
+        wx:key="id"
+        bindtap="edit"
+        data-id="{{item.id}}"
+      >
+        <view
+          class="circle {{item.doneToday || item.finished ? 'on' : ''}}"
+          style="{{item.doneToday || item.finished ? 'background:#22C55E' : ''}}"
+          catchtap="toggleDone"
+          data-id="{{item.id}}"
+        >
+          <text class="ck" wx:if="{{item.doneToday || item.finished}}">✓</text>
+        </view>
+
+        <view class="grow">
+          <view class="rm-title {{item.doneToday || item.finished ? 'done' : ''}}">{{item.title}}</view>
+          <view class="rm-meta ellipsis">
+            {{item.ruleText}}<text wx:if="{{item.linkText}}"> · {{item.linkText}}</text>
+          </view>
+          <view class="rm-next">下次：{{item.nextText}}<text wx:if="{{item.countdown}}"> · {{item.countdown}}</text></view>
+        </view>
+
+        <switch
+          class="sw"
+          checked="{{item.enabled}}"
+          color="#4C6FFF"
+          catchchange="toggleEnabled"
+          data-id="{{item.id}}"
+        />
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:else>
+    <view class="empty">还没有提醒</view>
+    <view class="btn btn-primary btn-block" bindtap="add">创建第一个提醒</view>
+  </view>
+
+  <view class="add-wrap">
+    <view class="btn btn-ghost btn-block" bindtap="add">+ 新建提醒</view>
+  </view>
+
+  <view class="tip">
+    提示：受微信限制，小程序无法在后台推送系统通知；提醒会在打开小程序时呈现在「今日」与「提醒」中。
+  </view>
+</view>

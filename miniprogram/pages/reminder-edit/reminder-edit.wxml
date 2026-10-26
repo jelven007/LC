@@ -1,0 +1,113 @@
+<view class="page">
+  <view class="card">
+    <view class="field">
+      <text class="label">提醒标题</text>
+      <input
+        class="val input"
+        placeholder="例如：晨间计划"
+        maxlength="24"
+        value="{{title}}"
+        bindinput="onTitle"
+      />
+    </view>
+
+    <view class="field">
+      <text class="label">重复方式</text>
+      <picker mode="selector" range="{{typeLabels}}" value="{{typeIndex}}" bindchange="onType">
+        <view class="val">{{typeLabels[typeIndex]}}</view>
+      </picker>
+    </view>
+
+    <view class="field">
+      <text class="label">提醒时间</text>
+      <picker mode="time" value="{{time}}" bindchange="onTime">
+        <view class="val">{{time}}</view>
+      </picker>
+    </view>
+
+    <view class="field" wx:if="{{type === 'once'}}">
+      <text class="label">日期</text>
+      <picker mode="date" value="{{date}}" start="1900-01-01" end="2099-12-31" bindchange="onDate">
+        <view class="val">{{date || '请选择'}}</view>
+      </picker>
+    </view>
+
+    <view class="field" wx:if="{{type === 'interval'}}">
+      <text class="label">间隔天数</text>
+      <input
+        class="val input"
+        type="number"
+        placeholder="例如：3"
+        value="{{intervalDays}}"
+        bindinput="onInterval"
+      />
+    </view>
+
+    <view class="field" wx:if="{{type === 'monthly'}}">
+      <text class="label">每月几号</text>
+      <picker mode="selector" range="{{monthDays}}" value="{{monthDayIndex}}" bindchange="onMonthDay">
+        <view class="val">{{monthDays[monthDayIndex]}} 号</view>
+      </picker>
+    </view>
+
+    <view class="field last" wx:if="{{type !== 'once'}}">
+      <text class="label">生效起始</text>
+      <picker mode="date" value="{{startDate}}" start="1900-01-01" end="2099-12-31" bindchange="onStart">
+        <view class="val">{{startDate || '请选择'}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{type === 'weekly'}}">
+    <view class="card-hd">
+      <text class="t">重复星期</text>
+      <text class="more">可多选</text>
+    </view>
+    <view class="weeks">
+      <view
+        wx:for="{{weekOptions}}"
+        wx:key="key"
+        class="week {{weekdays.indexOf(item.key) > -1 ? 'on' : ''}}"
+        data-day="{{item.key}}"
+        bindtap="toggleWeek"
+      >{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="field">
+      <text class="label">关联到</text>
+      <picker mode="selector" range="{{linkLabels}}" value="{{linkIndex}}" bindchange="onLink">
+        <view class="val ellipsis">{{linkLabels[linkIndex]}}</view>
+      </picker>
+    </view>
+    <view class="field last">
+      <text class="label">启用提醒</text>
+      <switch checked="{{enabled}}" color="#4C6FFF" bindchange="onEnabled" />
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-hd">
+      <text class="t">备注</text>
+    </view>
+    <textarea
+      class="textarea-box"
+      placeholder="给未来的自己留一句话（选填）"
+      maxlength="200"
+      value="{{note}}"
+      bindinput="onNote"
+      auto-height
+    />
+  </view>
+
+  <view class="card preview">
+    <text class="small muted">下一次提醒</text>
+    <view class="preview-val">{{preview}}</view>
+  </view>
+
+  <view class="foot">
+    <view class="btn btn-primary btn-block" bindtap="save">保存</view>
+    <view class="btn btn-danger btn-block" wx:if="{{isEdit}}" bindtap="remove">删除提醒</view>
+  </view>
+</view>

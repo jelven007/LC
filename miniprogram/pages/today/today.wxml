@@ -1,0 +1,161 @@
+<view class="page">
+  <!-- 顶部日期 -->
+  <view class="hero">
+    <view class="hero-row">
+      <view>
+        <view class="hero-day">{{dateDay}}</view>
+        <view class="hero-sub">{{dateYearMonth}} · {{dateWeek}}</view>
+      </view>
+      <view class="hero-right">
+        <view class="hero-pct">{{yearPercent}}%</view>
+        <view class="hero-sub">今年已过</view>
+      </view>
+    </view>
+    <view class="hero-bar">
+      <view class="hero-bar-in" style="width:{{yearPercent}}%"></view>
+    </view>
+    <view class="hero-foot">{{yearText}}</view>
+  </view>
+
+  <!-- 人生进度（时间统计口径，不做生存期预测） -->
+  <view class="card" wx:if="{{life.has}}">
+    <view class="card-hd">
+      <text class="t">人生进度</text>
+      <text class="more">按 {{life.expectYears}} 岁设定计算</text>
+    </view>
+    <view class="life-row">
+      <text class="life-pct">{{life.percent}}%</text>
+      <text class="life-desc"><text class="t-past">已走过 {{life.livedDays}} 天</text> · <text class="t-future">未来 {{life.remainDays}} 天</text></text>
+    </view>
+    <view class="bar lg">
+      <view class="bar-inner" style="width:{{life.percent}}%;background:linear-gradient(90deg,#5B7CFA,#7B5CFF)"></view>
+    </view>
+    <view class="life-grid">
+      <view wx:for="{{life.cells}}" wx:key="i" class="lc s{{item.state}}"></view>
+    </view>
+    <view class="life-foot" wx:if="{{life.overExpect}}">每格代表一年 · <text class="t-past">已走过 {{life.pastYears}} 格</text> · 已超出设定年限</view>
+    <view class="life-foot" wx:else>每格代表一年 · <text class="t-past">已走过 {{life.pastYears}} 格</text> · <text class="t-now">今年</text> · <text class="t-future">未来 {{life.futureYears}} 格</text></view>
+  </view>
+
+  <view class="card life-empty" wx:else bindtap="goMine">
+    <view class="row between">
+      <view>
+        <view class="t">看见人生进度</view>
+        <view class="small muted">在「我的」中填写出生日期，即可生成你的人生进度条</view>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 今日提醒 -->
+  <view class="card">
+    <view class="card-hd">
+      <text class="t">今日提醒</text>
+      <text class="more">{{reminders.length}} 项<text wx:if="{{soonCount}}"> · 近 7 天另有 {{soonCount}} 项</text></text>
+    </view>
+
+    <view wx:if="{{reminders.length}}">
+      <view class="rm-item" wx:for="{{reminders}}" wx:key="id" bindtap="editReminder" data-id="{{item.id}}">
+        <view
+          class="circle {{item.doneToday ? 'on' : ''}}"
+          style="{{item.doneToday ? 'background:#22C55E' : ''}}"
+          catchtap="toggleReminder"
+          data-id="{{item.id}}"
+        >
+          <text class="ck" wx:if="{{item.doneToday}}">✓</text>
+        </view>
+        <view class="grow">
+          <view class="rm-title {{item.doneToday ? 'done' : ''}}">{{item.title}}</view>
+          <view class="rm-meta ellipsis">
+            {{item.ruleText}}<text wx:if="{{item.linkText}}"> · {{item.linkText}}</text>
+          </view>
+        </view>
+        <view class="rm-right">
+          <view class="rm-time">{{item.time}}</view>
+          <view class="rm-tag {{item.overdue ? 't-past' : 't-now'}}">
+            {{item.overdue ? '逾期' : item.timePassed ? '已过时间' : '今天'}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="empty" wx:else>今天没有到期的提醒，安心过好这一天</view>
+
+    <view class="add-line" bindtap="addReminder">+ 新建提醒</view>
+  </view>
+
+  <!-- 进行中的阶段 -->
+  <view class="card">
+    <view class="card-hd">
+      <text class="t">进行中的阶段</text>
+      <text class="more" bindtap="goStages">全部 ›</text>
+    </view>
+    <view wx:if="{{stages.length}}">
+      <view class="st-item" wx:for="{{stages}}" wx:key="id">
+        <view class="st-head">
+          <view class="st-dot" style="background:{{item.color}}"></view>
+          <view class="grow st-name ellipsis">{{item.name}}</view>
+          <text class="chip">{{item.dimensionLabel}}</text>
+        </view>
+        <view class="bar">
+          <view class="bar-inner" style="width:{{item.percent}}%;background:{{item.color}}"></view>
+        </view>
+        <view class="st-meta">
+          <text class="t-past">已过 {{item.passed}}/{{item.total}} 天</text>
+          <text class="{{item.remainText === '今天结束' ? 't-now' : 't-future'}}">{{item.remainText}}</text>
+          <text class="pct" style="color:{{item.color}}">{{item.percent}}%</text>
+        </view>
+
+        <view class="goals" wx:if="{{item.goalList.length}}">
+          <view class="goal" wx:for="{{item.goalList}}" wx:for-item="g" wx:key="id">
+            <view
+              class="circle {{g.done ? 'on' : ''}}"
+              style="{{g.done ? 'background:' + g.color : ''}}"
+              catchtap="toggleGoal"
+              data-stage="{{item.id}}"
+              data-goal="{{g.id}}"
+            >
+              <text class="ck" wx:if="{{g.done}}">✓</text>
+            </view>
+            <text class="goal-title {{g.done ? 'done' : ''}}">{{g.title}}</text>
+            <text class="chip lv" style="color:{{g.color}};background:{{g.color}}1A">{{g.levelLabel}}</text>
+          </view>
+          <view class="goal-rest" wx:if="{{item.goalRest}}">还有 {{item.goalRest}} 项…</view>
+        </view>
+      </view>
+    </view>
+    <view class="empty" wx:else>还没有进行中的阶段，去「阶段」创建一个吧</view>
+
+    <view class="add-line" bindtap="addStage">+ 新建阶段</view>
+  </view>
+
+  <!-- 下一个阶段 -->
+  <view class="card" wx:if="{{nextStage}}">
+    <view class="card-hd">
+      <text class="t">即将开始</text>
+      <text class="more t-future">{{nextStage.statusText}}</text>
+    </view>
+    <view class="row">
+      <view class="st-dot" style="background:{{nextStage.color}}"></view>
+      <view class="grow">
+        <view class="st-name ellipsis">{{nextStage.name}}</view>
+        <view class="small muted">{{nextStage.dateText}}</view>
+      </view>
+      <text class="chip">{{nextStage.dimensionLabel}}</text>
+    </view>
+  </view>
+
+  <!-- 数据回顾入口 -->
+  <view class="card review-entry" bindtap="goReview">
+    <view class="row between">
+      <view class="grow">
+        <view class="t">数据回顾</view>
+        <view class="small muted">看看你的完成趋势与阶段完成率</view>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+
+  <view class="foot-tip" wx:if="{{undoneGoalCount}}">
+    进行中的阶段还有 {{undoneGoalCount}} 个目标未完成
+  </view>
+</view>

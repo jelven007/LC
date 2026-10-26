@@ -1,0 +1,123 @@
+<view class="page">
+  <!-- 已登录：云端身份 -->
+  <block wx:if="{{isLogin}}">
+    <view class="card">
+      <view class="card-hd">
+        <text class="t">微信账户</text>
+        <text class="more">已同步</text>
+      </view>
+      <view class="cur">
+        <view class="avatar wechat">微</view>
+        <view class="grow">
+          <view class="cur-name">微信用户 ···{{openidTail}}</view>
+          <view class="cur-sub">身份由微信提供 · 数据仅你本人可见</view>
+        </view>
+      </view>
+      <view class="acct-acts">
+        <view class="btn btn-ghost btn-sm" bindtap="syncNow">立即同步</view>
+        <view class="btn btn-ghost btn-sm" bindtap="doLogout">退出登录</view>
+      </view>
+      <view class="sync-hint">{{syncHint}}</view>
+    </view>
+
+    <view class="card">
+      <view class="card-hd">
+        <text class="t">数据安全</text>
+      </view>
+      <view class="wx-desc">
+        你的阶段、目标与提醒以<text class="strong">微信身份（openid）</text>为唯一索引存于云端，读写均受云数据库权限约束，其他用户无法访问。
+      </view>
+      <view class="wx-desc">
+        登录过程<text class="strong">不需要 AppSecret</text>：微信在云端直接完成身份鉴权并返回 openid，本程序全程不接触也不存储你的微信密码、手机号或会话密钥。
+      </view>
+    </view>
+
+    <view class="tip">
+      换手机后，在新设备用同一个微信登录即可自动恢复数据。卸载小程序前建议做一次备份导出。
+    </view>
+  </block>
+
+  <!-- 未登录：引导登录 + 本机账户 -->
+  <block wx:else>
+    <view class="card">
+      <view class="card-hd">
+        <text class="t">微信登录</text>
+        <text class="more">{{cloudReady ? '可登录' : '未启用'}}</text>
+      </view>
+      <view class="login-cta">
+        <view class="login-avatar wechat">微</view>
+        <view class="grow">
+          <view class="login-title">用微信账号登录</view>
+          <view class="login-sub">登录后，你的数据只属于你本人，换手机也能自动找回</view>
+        </view>
+      </view>
+      <view class="btn btn-primary btn-block" bindtap="doLogin">微信一键登录</view>
+      <view class="sync-hint">{{syncHint}}</view>
+    </view>
+
+    <!-- 本机账户 -->
+    <view class="card" wx:if="{{current}}">
+      <view class="card-hd">
+        <text class="t">本机账户</text>
+        <text class="more">{{users.length}} 个</text>
+      </view>
+      <view class="u-item {{item.isCurrent ? 'on' : ''}}" wx:for="{{users}}" wx:key="id">
+        <view class="avatar sm">{{item.avatarText}}</view>
+        <view class="grow u-body">
+          <view class="u-name ellipsis">
+            {{item.nickname}}
+            <text class="tag" wx:if="{{item.isCurrent}}">当前</text>
+          </view>
+          <view class="u-meta">{{item.stageCount}} 阶段 · {{item.goalCount}} 目标 · {{item.reminderCount}} 提醒</view>
+          <view class="u-meta">创建于 {{item.createdText}}</view>
+        </view>
+        <view class="u-acts">
+          <text class="u-act" wx:if="{{!item.isCurrent}}" data-id="{{item.id}}" bindtap="switchTo">切换</text>
+          <text class="u-act" data-id="{{item.id}}" bindtap="openRename">改名</text>
+          <text class="u-act danger" data-id="{{item.id}}" data-name="{{item.nickname}}" bindtap="remove">删除</text>
+        </view>
+      </view>
+      <view class="add-line" bindtap="openCreate">＋ 新建本机账户</view>
+    </view>
+  </block>
+
+  <view class="tip" wx:if="{{!isLogin}}">
+    本机账户保存在这台设备上，换设备需用「我的 → 数据管理」的备份导出迁移。登录后则无需手动迁移。
+  </view>
+
+  <!-- 新建弹窗 -->
+  <view class="mask" wx:if="{{showCreate}}" bindtap="hideCreate">
+    <view class="modal" catchtap="noop">
+      <view class="modal-title">新建账户</view>
+      <input
+        class="modal-input"
+        placeholder="给这个账户起个名字，例如：工作 / 家庭"
+        maxlength="12"
+        value="{{newName}}"
+        bindinput="onNewName"
+      />
+      <view class="modal-btns">
+        <view class="btn btn-ghost" bindtap="hideCreate">取消</view>
+        <view class="btn btn-primary" bindtap="confirmCreate">创建并切换</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 改名弹窗 -->
+  <view class="mask" wx:if="{{showRename}}" bindtap="hideRename">
+    <view class="modal" catchtap="noop">
+      <view class="modal-title">重命名</view>
+      <input
+        class="modal-input"
+        placeholder="新的名称"
+        maxlength="12"
+        value="{{renameName}}"
+        bindinput="onRenameInput"
+      />
+      <view class="modal-btns">
+        <view class="btn btn-ghost" bindtap="hideRename">取消</view>
+        <view class="btn btn-primary" bindtap="confirmRename">保存</view>
+      </view>
+    </view>
+  </view>
+</view>

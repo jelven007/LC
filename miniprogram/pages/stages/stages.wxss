@@ -1,0 +1,222 @@
+.filter {
+  display: flex;
+  align-items: center;
+  background: var(--color-bg-primary);
+  border-radius: 999rpx;
+  padding: 10rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(27, 31, 42, 0.05);
+}
+
+.filter-item {
+  flex: 1;
+  text-align: center;
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  padding: 12rpx 0;
+  border-radius: 999rpx;
+}
+
+.filter-item.on {
+  background: linear-gradient(135deg, #5B7CFA, #7B5CFF);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.filter-add {
+  padding: 12rpx 24rpx;
+  font-size: 26rpx;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.summary {
+  font-size: 24rpx;
+  color: var(--color-text-tertiary);
+  padding: 0 8rpx 20rpx;
+}
+
+.stage-card {
+  padding: 28rpx;
+}
+
+.st-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 14rpx;
+  flex-shrink: 0;
+}
+
+.st-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.desc {
+  font-size: 24rpx;
+  color: var(--color-text-tertiary);
+  margin: 12rpx 0 0 30rpx;
+  line-height: 1.6;
+}
+
+.date-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16rpx 0 12rpx 30rpx;
+}
+
+.status {
+  font-size: 22rpx;
+  padding: 4rpx 14rpx;
+  border-radius: 999rpx;
+}
+
+/* 阶段状态：进行中=橙红（现在），未开始=紫（未来），已结束=米黄（过去） */
+.status.s-active {
+  background: var(--color-now-bg);
+  color: var(--color-now);
+}
+
+.status.s-upcoming {
+  background: var(--color-future-bg);
+  color: var(--color-future);
+}
+
+.status.s-done,
+.status.s-invalid {
+  background: var(--color-past-bg);
+  color: var(--color-past);
+}
+
+.st-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 12rpx;
+}
+
+.st-meta .pct {
+  font-weight: 600;
+}
+
+.lv-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 16rpx;
+}
+
+.lv {
+  display: flex;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+.lv-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  margin-right: 8rpx;
+}
+
+.lv-all {
+  margin-left: auto;
+}
+
+.acts {
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+  padding-top: 18rpx;
+  border-top: 1rpx dashed var(--color-border-secondary);
+}
+
+.act {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  padding: 8rpx 18rpx;
+  background: var(--color-bg-tertiary);
+  border-radius: 999rpx;
+  margin-right: 12rpx;
+}
+
+.act.danger {
+  color: var(--color-danger);
+  background: #FFF0F0;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.goal-list {
+  margin-top: 16rpx;
+  padding-top: 8rpx;
+  border-top: 1rpx solid var(--color-border-tertiary);
+}
+
+.goal {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 0;
+}
+
+.goal-title {
+  flex: 1;
+  min-width: 0;
+  margin-left: 16rpx;
+  font-size: 26rpx;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.goal-title.done {
+  color: var(--color-text-quaternary);
+  text-decoration: line-through;
+}
+
+.chip.lv {
+  margin-left: 12rpx;
+}
+
+.del {
+  color: var(--color-text-quaternary);
+  font-size: 26rpx;
+  padding: 0 8rpx 0 16rpx;
+}
+
+.empty.sm {
+  padding: 16rpx 0;
+}
+
+.modal-input {
+  background: var(--color-bg-secondary);
+  border-radius: 16rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+}
+
+.seg {
+  display: flex;
+  margin-top: 24rpx;
+}
+
+.seg-item {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  margin: 0 8rpx;
+  font-size: 26rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid var(--color-border-secondary);
+  color: var(--color-text-secondary);
+}
+
+.seg-item.on {
+  font-weight: 600;
+}

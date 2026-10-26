@@ -1,0 +1,116 @@
+<view class="page">
+  <!-- 筛选 -->
+  <view class="filter">
+    <view
+      wx:for="{{dims}}"
+      wx:key="key"
+      class="filter-item {{filter === item.key ? 'on' : ''}}"
+      data-key="{{item.key}}"
+      bindtap="onFilter"
+    >{{item.label}}</view>
+    <view class="filter-add" bindtap="addStage">+ 新建</view>
+  </view>
+
+  <view class="summary" wx:if="{{summary.stageCount}}">
+    共 {{summary.stageCount}} 个阶段 · 目标完成 {{summary.goalDone}}/{{summary.goalTotal}}（{{summary.percent}}%）
+  </view>
+
+  <view wx:if="{{list.length}}">
+    <view class="card stage-card" wx:for="{{list}}" wx:key="id">
+      <view class="row">
+        <view class="st-dot" style="background:{{item.color}}"></view>
+        <view class="grow st-name ellipsis">{{item.name}}</view>
+        <text class="chip">{{item.dimensionLabel}}</text>
+      </view>
+
+      <view class="desc" wx:if="{{item.desc}}">{{item.desc}}</view>
+
+      <view class="date-row">
+        <text class="small muted">{{item.dateText}}</text>
+        <text class="status s-{{item.status}}">{{item.statusText}}</text>
+      </view>
+
+      <view class="bar">
+        <view class="bar-inner" style="width:{{item.percent}}%;background:{{item.color}}"></view>
+      </view>
+      <view class="st-meta">
+        <text class="t-past">已过 {{item.passed}}/{{item.total}} 天</text>
+        <text class="{{item.remainText === '今天结束' ? 't-now' : 't-future'}}">{{item.remainText}}</text>
+        <text class="pct" style="color:{{item.color}}">{{item.percent}}%</text>
+      </view>
+
+      <!-- 目标概览 -->
+      <view class="lv-row" wx:if="{{item.goals.total}}">
+        <block wx:for="{{item.goals.levelList}}" wx:for-item="lv" wx:key="key">
+          <view class="lv" wx:if="{{lv.total}}">
+            <text class="lv-dot" style="background:{{lv.color}}"></text>
+            <text class="small">{{lv.label}} {{lv.done}}/{{lv.total}}</text>
+          </view>
+        </block>
+        <text class="small muted lv-all">总进度 {{item.goals.percent}}%</text>
+      </view>
+
+      <!-- 操作 -->
+      <view class="acts">
+        <view class="act" data-id="{{item.id}}" bindtap="toggleOpen">
+          目标 {{item.goals.done}}/{{item.goals.total}} {{item.open ? '▴' : '▾'}}
+        </view>
+        <view class="act" data-id="{{item.id}}" bindtap="openGoalModal">+ 目标</view>
+        <view class="act" data-id="{{item.id}}" bindtap="editStage">编辑</view>
+        <view class="act danger" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="deleteStage">删除</view>
+      </view>
+
+      <!-- 目标列表 -->
+      <view class="goal-list" wx:if="{{item.open}}">
+        <view class="goal" wx:for="{{item.goalList}}" wx:for-item="g" wx:key="id">
+          <view
+            class="circle {{g.done ? 'on' : ''}}"
+            style="{{g.done ? 'background:' + g.color : ''}}"
+            catchtap="toggleGoal"
+            data-stage="{{item.id}}"
+            data-goal="{{g.id}}"
+          >
+            <text class="ck" wx:if="{{g.done}}">✓</text>
+          </view>
+          <text class="goal-title {{g.done ? 'done' : ''}}">{{g.title}}</text>
+          <text class="chip lv" style="color:{{g.color}};background:{{g.color}}1A">{{g.levelLabel}}</text>
+          <text class="del" catchtap="deleteGoal" data-stage="{{item.id}}" data-goal="{{g.id}}">✕</text>
+        </view>
+        <view class="empty sm" wx:if="{{!item.goals.total}}">还没有目标，点「+ 目标」添加</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:else>
+    <view class="empty">还没有阶段</view>
+    <view class="btn btn-primary btn-block" bindtap="addStage">创建第一个阶段</view>
+  </view>
+
+  <!-- 添加目标弹窗 -->
+  <view class="mask" wx:if="{{goalModal}}" bindtap="hideGoalModal">
+    <view class="modal" catchtap="noop">
+      <view class="modal-title">添加目标</view>
+      <input
+        class="modal-input"
+        placeholder="例如：读完 12 本书"
+        maxlength="40"
+        value="{{goalTitle}}"
+        bindinput="onGoalTitle"
+      />
+      <view class="seg">
+        <view
+          wx:for="{{levels}}"
+          wx:key="key"
+          class="seg-item {{goalLevel === item.key ? 'on' : ''}}"
+          style="{{goalLevel === item.key ? 'background:' + item.color + ';color:#FFFFFF;border-color:' + item.color : ''}}"
+          data-key="{{item.key}}"
+          bindtap="pickLevel"
+        >{{item.label}}</view>
+      </view>
+      <view class="modal-btns">
+        <view class="btn btn-ghost" bindtap="hideGoalModal">取消</view>
+        <view class="btn btn-primary" bindtap="confirmGoal">添加</view>
+      </view>
+    </view>
+  </view>
+</view>

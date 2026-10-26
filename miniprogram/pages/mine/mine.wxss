@@ -1,0 +1,277 @@
+/* 品牌头部 */
+.brand {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #5B7CFA 0%, #7B5CFF 100%);
+  border-radius: 28rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  color: #FFFFFF;
+  box-shadow: 0 12rpx 30rpx rgba(91, 124, 250, 0.28);
+}
+
+.brand-logo {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 22rpx;
+  flex-shrink: 0;
+  margin-right: 24rpx;
+  background: #FFFFFF;
+}
+
+.brand-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.brand-name {
+  font-size: 36rpx;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.brand-slogan {
+  font-size: 24rpx;
+  opacity: 0.88;
+  margin-top: 8rpx;
+}
+
+/* 微信登录 */
+.login-cta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.login-avatar {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+}
+
+.login-avatar.wechat {
+  background: linear-gradient(135deg, #07C160, #0BB35B);
+  color: #FFFFFF;
+}
+
+.login-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.login-sub {
+  font-size: 23rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 8rpx;
+  line-height: 1.5;
+}
+
+.login-tip {
+  font-size: 21rpx;
+  color: var(--color-text-tertiary);
+  text-align: center;
+  margin-top: 16rpx;
+  line-height: 1.5;
+}
+
+/* 云同步诊断 */
+.diag {
+  margin-bottom: 20rpx;
+}
+
+.diag-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid var(--color-border-secondary);
+}
+
+.diag-row:last-child {
+  border-bottom: none;
+}
+
+.diag-label {
+  width: 160rpx;
+  flex-shrink: 0;
+  font-size: 26rpx;
+  color: var(--color-text-tertiary);
+  line-height: 1.6;
+}
+
+.diag-val {
+  flex: 1;
+  min-width: 0;
+  font-size: 26rpx;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  word-break: break-all;
+}
+
+.acct-acts {
+  display: flex;
+  margin-top: 20rpx;
+  padding-top: 18rpx;
+  border-top: 1rpx dashed var(--color-border-secondary);
+}
+
+.acct-acts .btn {
+  flex: 1;
+  margin: 0 8rpx;
+}
+
+.acct-avatar.wechat {
+  background: linear-gradient(135deg, #07C160, #0BB35B);
+  color: #FFFFFF;
+}
+
+/* 当前账户 */
+.acct {
+  display: flex;
+  align-items: center;
+}
+
+.acct-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5B7CFA, #7B5CFF);
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+}
+
+.acct-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.acct-sub {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 6rpx;
+}
+
+.arrow {
+  color: var(--color-text-quaternary);
+  font-size: 40rpx;
+  flex-shrink: 0;
+}
+
+.about {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  padding-bottom: 8rpx;
+}
+
+.icp {
+  text-align: center;
+  font-size: 21rpx;
+  color: var(--color-text-tertiary);
+  padding-top: 16rpx;
+  border-top: 1rpx solid var(--color-border-tertiary);
+  margin-top: 8rpx;
+}
+
+.stat-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 6rpx;
+}
+
+.field.last {
+  border-bottom: none;
+}
+
+.input {
+  text-align: right;
+}
+
+.clear-birth {
+  text-align: center;
+  font-size: 24rpx;
+  color: var(--color-danger);
+  padding-top: 20rpx;
+}
+
+.ops {
+  margin-top: 4rpx;
+}
+
+.op {
+  padding: 22rpx 0;
+  border-bottom: 1rpx solid var(--color-border-tertiary);
+}
+
+.op:last-child {
+  border-bottom: none;
+}
+
+.op-title {
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+}
+
+.op-desc {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 4rpx;
+}
+
+.op.danger .op-title {
+  color: var(--color-danger);
+}
+
+.tip {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  line-height: 1.6;
+  padding: 4rpx 8rpx 0;
+}
+
+.modal.sheet {
+  border-radius: 28rpx;
+}
+
+.json {
+  height: 400rpx;
+  font-size: 20rpx;
+  line-height: 1.4;
+}
+
+.sheet-tip {
+  margin-top: 16rpx;
+  font-size: 20rpx;
+  color: var(--color-text-tertiary);
+  word-break: break-all;
+}

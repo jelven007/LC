@@ -1,0 +1,121 @@
+.field.last {
+  border-bottom: none;
+}
+
+.input {
+  text-align: right;
+}
+
+.colors {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.color {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  margin: 0 20rpx 16rpx 0;
+  border: 6rpx solid transparent;
+  box-sizing: border-box;
+}
+
+.color.on {
+  border-color: var(--color-border-secondary);
+  box-shadow: 0 0 0 4rpx var(--color-bg-primary) inset;
+}
+
+.goal-edit {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid var(--color-border-tertiary);
+}
+
+.goal-input {
+  flex: 1;
+  min-width: 0;
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+}
+
+.goal-level {
+  font-size: 24rpx;
+  padding: 8rpx 18rpx;
+  background: var(--color-bg-tertiary);
+  border-radius: 999rpx;
+  margin-left: 16rpx;
+}
+
+.del {
+  color: var(--color-text-quaternary);
+  font-size: 28rpx;
+  padding: 0 8rpx 0 20rpx;
+}
+
+.empty.sm {
+  padding: 12rpx 0;
+}
+
+.foot {
+  margin-top: 12rpx;
+}
+
+.foot .btn {
+  margin-bottom: 20rpx;
+}
+
+/* 模板选择 */
+.tpl-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tpl {
+  width: 100%;
+  padding: 22rpx 24rpx;
+  border-radius: 18rpx;
+  background: var(--color-bg-secondary);
+  border: 2rpx solid transparent;
+  margin-bottom: 16rpx;
+  box-sizing: border-box;
+}
+
+.tpl.on {
+  border-color: var(--color-primary);
+  background: rgba(76, 111, 255, 0.08);
+}
+
+.tpl-top {
+  display: flex;
+  align-items: center;
+}
+
+.tpl-dot {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+}
+
+.tpl-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.tpl-desc {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 8rpx;
+  line-height: 1.5;
+}
+
+.tpl-goals {
+  font-size: 22rpx;
+  color: var(--color-text-quaternary);
+  margin-top: 8rpx;
+}

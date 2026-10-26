@@ -1,0 +1,139 @@
+<view class="page">
+  <!-- 快捷模板（仅新建时展示） -->
+  <view class="card" wx:if="{{showTemplates}}">
+    <view class="card-hd">
+      <text class="t">从模板开始</text>
+      <text class="more" bindtap="toggleTemplates">{{templateKey ? '收起' : '选一个'}}</text>
+    </view>
+    <block wx:if="{{!templateKey}}">
+      <view class="tpl-wrap">
+        <view
+          class="tpl"
+          wx:for="{{templates}}"
+          wx:key="key"
+          data-key="{{item.key}}"
+          bindtap="applyTemplate"
+        >
+          <view class="tpl-top">
+            <view class="tpl-dot" style="background:{{item.color}}"></view>
+            <view class="tpl-name ellipsis">{{item.name}}</view>
+            <text class="chip">{{item.goals.length}} 项目标</text>
+          </view>
+          <view class="tpl-desc">{{item.desc}}</view>
+        </view>
+      </view>
+    </block>
+    <view wx:else>
+      <view class="tpl on">
+        <view class="tpl-top">
+          <view class="tpl-dot" style="background:{{color}}"></view>
+          <view class="tpl-name ellipsis">{{name || '已选择模板'}}</view>
+          <text class="chip" bindtap="clearTemplate">换一个</text>
+        </view>
+        <view class="tpl-desc">已自动填入名称、维度、颜色与示例目标，可直接修改。</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="field">
+      <text class="label">阶段名称</text>
+      <input
+        class="val input"
+        placeholder="例如：本年 · 专注成长"
+        maxlength="24"
+        value="{{name}}"
+        bindinput="onName"
+      />
+    </view>
+
+    <view class="field">
+      <text class="label">时间维度</text>
+      <picker mode="selector" range="{{dimLabels}}" value="{{dimIndex}}" bindchange="onDimension">
+        <view class="val">{{dimLabels[dimIndex]}}</view>
+      </picker>
+    </view>
+
+    <view class="field">
+      <text class="label">开始日期</text>
+      <picker mode="date" value="{{startDate}}" start="1900-01-01" end="2099-12-31" bindchange="onStart">
+        <view class="val {{startDate ? '' : 'ph'}}">{{startDate || '请选择'}}</view>
+      </picker>
+    </view>
+
+    <view class="field last">
+      <text class="label">结束日期</text>
+      <picker mode="date" value="{{endDate}}" start="1900-01-01" end="2099-12-31" bindchange="onEnd">
+        <view class="val {{endDate ? '' : 'ph'}}">{{endDate || '请选择'}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-hd">
+      <text class="t">颜色标记</text>
+    </view>
+    <view class="colors">
+      <view
+        wx:for="{{colors}}"
+        wx:key="*this"
+        class="color {{color === item ? 'on' : ''}}"
+        style="background:{{item}}"
+        data-color="{{item}}"
+        bindtap="pickColor"
+      ></view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-hd">
+      <text class="t">阶段说明</text>
+    </view>
+    <textarea
+      class="textarea-box"
+      placeholder="这一阶段你想完成什么？写下来更容易实现"
+      maxlength="200"
+      value="{{desc}}"
+      bindinput="onDesc"
+      auto-height
+    />
+  </view>
+
+  <view class="card">
+    <view class="card-hd">
+      <text class="t">阶段目标</text>
+      <text class="more">{{goals.length}} 项</text>
+    </view>
+
+    <view wx:if="{{goals.length}}">
+      <view class="goal-edit" wx:for="{{goals}}" wx:key="id">
+        <input
+          class="goal-input"
+          placeholder="目标内容"
+          maxlength="40"
+          value="{{item.title}}"
+          data-index="{{index}}"
+          bindinput="onGoalTitle"
+        />
+        <picker
+          mode="selector"
+          range="{{levelLabels}}"
+          value="{{item.levelIndex}}"
+          data-index="{{index}}"
+          bindchange="onGoalLevel"
+        >
+          <view class="goal-level" style="color:{{levelColors[item.levelIndex]}}">{{levelLabels[item.levelIndex]}}</view>
+        </picker>
+        <text class="del" data-index="{{index}}" bindtap="deleteGoal">✕</text>
+      </view>
+    </view>
+    <view class="empty sm" wx:else>还没有目标</view>
+
+    <view class="add-line" bindtap="addGoal">+ 添加目标</view>
+  </view>
+
+  <view class="foot">
+    <view class="btn btn-primary btn-block" bindtap="save">保存</view>
+    <view class="btn btn-danger btn-block" wx:if="{{isEdit}}" bindtap="remove">删除阶段</view>
+  </view>
+</view>

@@ -1,0 +1,44 @@
+.field.last {
+  border-bottom: none;
+}
+
+.input {
+  text-align: right;
+}
+
+.weeks {
+  display: flex;
+  justify-content: space-between;
+}
+
+.week {
+  width: 76rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-tertiary);
+}
+
+.week.on {
+  background: linear-gradient(135deg, #5B7CFA, #7B5CFF);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.preview-val {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-top: 8rpx;
+}
+
+.foot {
+  margin-top: 12rpx;
+}
+
+.foot .btn {
+  margin-bottom: 20rpx;
+}

@@ -1,0 +1,221 @@
+<view class="page">
+  <!-- 品牌头部 -->
+  <view class="brand">
+    <image class="brand-logo" src="/images/app-icon-144.png" mode="aspectFill" />
+    <view class="brand-info">
+      <view class="brand-name">生命倒计时</view>
+      <view class="brand-slogan">把有限的时间，放进清晰的规划里</view>
+    </view>
+  </view>
+
+  <!-- 微信登录 -->
+  <view class="card">
+    <view class="card-hd">
+      <text class="t">{{isLogin ? '微信账户' : '登录'}}</text>
+      <text class="more">{{isLogin ? '已同步' : cloudReady ? '可登录' : '本地模式'}}</text>
+    </view>
+
+    <block wx:if="{{isLogin}}">
+      <view class="acct">
+        <view class="acct-avatar wechat">微</view>
+        <view class="grow">
+          <view class="acct-name">微信用户 ···{{openidTail}}</view>
+          <view class="acct-sub">{{syncText}}</view>
+        </view>
+      </view>
+      <view class="acct-acts">
+        <view class="btn btn-ghost btn-sm" bindtap="syncNow">立即同步</view>
+        <view class="btn btn-ghost btn-sm" bindtap="doLogout">退出登录</view>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="login-cta">
+        <view class="login-avatar wechat">微</view>
+        <view class="grow">
+          <view class="login-title">用微信账号登录</view>
+          <view class="login-sub">登录后，你的阶段、目标与提醒只属于你本人，换手机也能找回</view>
+        </view>
+      </view>
+      <view class="btn btn-primary btn-block" bindtap="doLogin">微信一键登录</view>
+      <view class="login-tip" wx:if="{{!cloudReady}}">云环境未配置，当前为本地模式（功能可正常使用，数据仅存本机）</view>
+    </block>
+  </view>
+
+  <!-- 云同步诊断：逐项验证环境ID / 云函数 / 数据库 -->
+  <view class="card" wx:if="{{cloudReady}}">
+    <view class="card-hd">
+      <text class="t">云同步诊断</text>
+      <text class="more">{{diagRunning ? '诊断中' : '点按钮开始检查'}}</text>
+    </view>
+    <view class="diag">
+      <view class="diag-row">
+        <text class="diag-label">环境 ID</text>
+        <text class="diag-val">{{diag.env}}</text>
+      </view>
+      <view class="diag-row">
+        <text class="diag-label">登录云函数</text>
+        <text class="diag-val">{{diag.fn}}</text>
+      </view>
+      <view class="diag-row">
+        <text class="diag-label">数据库读写</text>
+        <text class="diag-val">{{diag.db}}</text>
+      </view>
+    </view>
+    <view class="btn btn-ghost btn-sm" bindtap="runDiag">{{diagRunning ? '诊断中…' : '运行诊断'}}</view>
+  </view>
+
+  <!-- 本地账户（未登录时才展示） -->
+  <view class="card" wx:if="{{!isLogin && currentUser}}">
+    <view class="card-hd">
+      <text class="t">本机账户</text>
+      <text class="more">免登录</text>
+    </view>
+    <view class="acct" bindtap="goAccount">
+      <view class="acct-avatar">{{currentUser.avatarText}}</view>
+      <view class="grow">
+        <view class="acct-name ellipsis">{{currentUser.nickname}}</view>
+        <view class="acct-sub">{{userCount}} 个账户 · 数据相互独立</view>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 概览 -->
+  <view class="card">
+    <view class="card-hd">
+      <text class="t">数据概览</text>
+    </view>
+    <view class="stat-grid">
+      <view class="stat">
+        <view class="stat-num">{{stats.stageCount}}</view>
+        <view class="stat-label">阶段</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num">{{stats.activeCount}}</view>
+        <view class="stat-label">进行中</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num">{{stats.goalTotal}}</view>
+        <view class="stat-label">目标</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num">{{stats.goalPercent}}%</view>
+        <view class="stat-label">目标完成</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num">{{stats.reminderCount}}</view>
+        <view class="stat-label">提醒</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 生命设置 -->
+  <view class="card">
+    <view class="card-hd">
+      <text class="t">人生进度设置</text>
+    </view>
+    <view class="field">
+      <text class="label">出生日期</text>
+      <picker mode="date" value="{{birthDate}}" start="1900-01-01" end="{{maxDate}}" bindchange="onBirth">
+        <view class="val {{birthDate ? '' : 'ph'}}">{{birthDate || '请选择'}}</view>
+      </picker>
+    </view>
+    <view class="field">
+      <text class="label">预期年限</text>
+      <input class="val input" type="number" value="{{lifeExpectancy}}" bindinput="onExpect" />
+    </view>
+    <view class="field last" wx:if="{{birthDate}}">
+      <text class="label">已度过</text>
+      <view class="val t-past">{{life.livedDays}} 天 · 约 {{life.years}} 岁</view>
+    </view>
+    <view class="clear-birth" wx:if="{{birthDate}}" bindtap="clearBirth">清除出生日期</view>
+  </view>
+
+  <!-- 数据管理 -->
+  <view class="card">
+    <view class="card-hd">
+      <text class="t">数据管理</text>
+      <text class="more">{{isLogin ? '云端同步' : '本地存储'}}</text>
+    </view>
+    <view class="ops">
+      <view class="op" bindtap="goAccount">
+        <view class="op-title">账户管理</view>
+        <view class="op-desc">多账户切换、新建与数据隔离</view>
+      </view>
+      <view class="op" bindtap="goReview">
+        <view class="op-title">数据回顾</view>
+        <view class="op-desc">完成趋势、阶段完成率与时间线</view>
+      </view>
+      <view class="op" bindtap="openExport">
+        <view class="op-title">备份导出</view>
+        <view class="op-desc">生成 JSON，可复制或保存为文件</view>
+      </view>
+      <view class="op" bindtap="openImport">
+        <view class="op-title">导入恢复</view>
+        <view class="op-desc">从剪贴板读取备份并覆盖</view>
+      </view>
+      <view class="op" bindtap="loadDemo">
+        <view class="op-title">载入示例数据</view>
+        <view class="op-desc">快速体验阶段、目标与提醒</view>
+      </view>
+      <view class="op danger" bindtap="clearAll">
+        <view class="op-title">清空全部数据</view>
+        <view class="op-desc">删除所有阶段、目标与提醒</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="tip">
+    {{isLogin ? '数据已同步至微信云开发环境，仅你本人可访问。更换设备用同一微信登录即可找回。' : '数据保存在本机小程序存储中，不会上传服务器。更换设备或卸载小程序前，请先「备份导出」，或登录微信实现自动同步。'}}
+  </view>
+
+  <!-- 关于 -->
+  <view class="card">
+    <view class="card-hd">
+      <text class="t">关于</text>
+      <text class="more">v{{version}}</text>
+    </view>
+    <view class="about">
+      「生命倒计时」用年、季、月、周、天五种维度帮你划分人生阶段，管理目标与提醒，把有限的时间放进清晰的规划里。
+    </view>
+    <view class="op" bindtap="openContract">
+      <view class="op-title">用户隐私保护指引</view>
+      <view class="op-desc">查看我们对剪贴板等信息的处理方式</view>
+    </view>
+    <view class="icp" wx:if="{{icpNumber}}">备案号 {{icpNumber}}</view>
+  </view>
+
+  <!-- 导出弹窗 -->
+  <view class="mask" wx:if="{{showExport}}" bindtap="closeExport">
+    <view class="modal sheet" catchtap="noop">
+      <view class="modal-title">备份数据</view>
+      <textarea class="textarea-box json" value="{{exportText}}" disabled />
+      <view class="modal-btns">
+        <view class="btn btn-ghost" bindtap="copyExport">复制</view>
+        <view class="btn btn-ghost" bindtap="saveExportFile">保存文件</view>
+        <view class="btn btn-primary" wx:if="{{exportPath}}" bindtap="shareExportFile">转发</view>
+      </view>
+      <view class="sheet-tip" wx:if="{{exportPath}}">文件已保存到：{{exportPath}}</view>
+    </view>
+  </view>
+
+  <!-- 导入弹窗 -->
+  <view class="mask" wx:if="{{showImport}}" bindtap="closeImport">
+    <view class="modal sheet" catchtap="noop">
+      <view class="modal-title">导入数据</view>
+      <textarea
+        class="textarea-box json"
+        placeholder="粘贴之前导出的 JSON 备份内容"
+        value="{{importText}}"
+        bindinput="onImportText"
+      />
+      <view class="modal-btns">
+        <view class="btn btn-ghost" bindtap="closeImport">取消</view>
+        <view class="btn btn-primary" bindtap="doImport">导入并覆盖</view>
+      </view>
+    </view>
+  </view>
+
+  <privacy-popup show="{{showPrivacy}}" bind:agree="onAgreePrivacy" bind:disagree="onDisagreePrivacy" />
+</view>

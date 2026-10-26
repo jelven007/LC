@@ -1,0 +1,23 @@
+<view class="pp-mask" wx:if="{{show}}">
+  <view class="pp" catchtap="noop">
+    <view class="pp-title">用户隐私保护提示</view>
+    <view class="pp-body">
+      感谢你使用「生命倒计时」。你的阶段、目标与提醒数据，在
+      <text class="strong">未登录时仅保存在本机</text>小程序存储中；
+      若你使用<text class="strong">微信登录</text>，数据会同步至微信云开发环境，
+      且<text class="strong">仅你本人可访问</text>。
+      在使用「备份导出 / 导入恢复」时，我们会读取或写入你的
+      <text class="strong">剪贴板</text>，仅用于数据备份，不会用于其他用途。
+    </view>
+    <button class="pp-link" bindtap="openContract" plain="true">查看《小程序用户隐私保护指引》</button>
+    <view class="pp-btns">
+      <button class="pp-btn ghost" bindtap="onDisagree">暂不同意</button>
+      <button
+        id="agree-btn"
+        class="pp-btn primary"
+        open-type="agreePrivacyAuthorization"
+        bindagreeprivacyauthorization="onAgree"
+      >同意并继续</button>
+    </view>
+  </view>
+</view>

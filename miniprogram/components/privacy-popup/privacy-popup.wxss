@@ -1,0 +1,76 @@
+.pp-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(17, 20, 28, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx;
+  box-sizing: border-box;
+  z-index: 999;
+}
+
+.pp {
+  width: 100%;
+  background: var(--color-bg-primary);
+  border-radius: 28rpx;
+  padding: 36rpx 32rpx 28rpx;
+  box-sizing: border-box;
+}
+
+.pp-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 24rpx;
+  color: var(--color-text-primary);
+}
+
+.pp-body {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.strong {
+  color: var(--color-primary);
+}
+
+.pp-link {
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  color: var(--color-primary);
+  text-align: left;
+  padding: 0;
+  border: none;
+  background: transparent;
+  line-height: 1.6;
+}
+
+.pp-btns {
+  display: flex;
+  margin-top: 28rpx;
+}
+
+.pp-btn {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  border-radius: 999rpx;
+  margin: 0 8rpx;
+  border: none;
+}
+
+.pp-btn.ghost {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-secondary);
+}
+
+.pp-btn.primary {
+  background: linear-gradient(135deg, #5B7CFA, #7B5CFF);
+  color: #FFFFFF;
+}

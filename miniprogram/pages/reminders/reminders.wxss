@@ -1,0 +1,83 @@
+.summary {
+  font-size: 24rpx;
+  color: var(--color-text-tertiary);
+  padding: 0 8rpx 20rpx;
+}
+
+/* 分组标题色调：逾期=米黄（过去），今天=橙红（现在），未来=紫 */
+.card-hd .t.past {
+  color: var(--color-past);
+}
+
+.card-hd .t.now {
+  color: var(--color-now);
+}
+
+.card-hd .t.future {
+  color: var(--color-future);
+}
+
+.card-hd .t.muted {
+  color: var(--color-text-tertiary);
+}
+
+.rm {
+  display: flex;
+  align-items: flex-start;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--color-border-tertiary);
+}
+
+.rm:last-child {
+  border-bottom: none;
+}
+
+.rm.off .rm-title,
+.rm.off .rm-meta,
+.rm.off .rm-next {
+  color: var(--color-text-quaternary);
+}
+
+.rm-title {
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+}
+
+.rm-title.done {
+  color: var(--color-text-quaternary);
+  text-decoration: line-through;
+}
+
+.rm-meta {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 6rpx;
+}
+
+/* 下次触发时间=未来（紫）；逾期=过去（米黄） */
+.rm-next {
+  font-size: 22rpx;
+  color: var(--color-future);
+  margin-top: 8rpx;
+}
+
+.rm.overdue .rm-next {
+  color: var(--color-past);
+}
+
+.sw {
+  margin-left: 16rpx;
+  transform: scale(0.8);
+  flex-shrink: 0;
+}
+
+.add-wrap {
+  margin-top: 8rpx;
+}
+
+.tip {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  line-height: 1.6;
+  padding: 12rpx 8rpx 0;
+}
